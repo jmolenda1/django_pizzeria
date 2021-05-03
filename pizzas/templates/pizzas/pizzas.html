@@ -1,0 +1,21 @@
+{% extends "pizzas/base.html" %}
+{% block title %}
+Pizza List Page | Papa John's Pizzeria
+{% endblock %}
+{% block content %}
+
+<p>
+    <font face="Optima" size="20px" color="FF5733"> WELCOME TO THE HOME OF WACO'S WORLD FAMOUS PIZZERIA </font>
+    {% load static %} <br><img src="{% static " static\images\Pizzeria_Logo.jpg" %}" alt="Pizza Page" />
+
+</p>
+
+{% for pizza in pizzas %}
+<a href="{% url 'pizzas:pizza' pizza.id %}">
+{{ pizza }}
+</a>
+<br>
+{% endfor %}
+
+{% endblock content %}
+

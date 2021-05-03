@@ -19,4 +19,13 @@ class Topping(models.Model):
         verbose_name_plural = 'Toppings'
 
     def __str__(self):
-        return f"{self.text[:50]}..."
+        return self.text
+
+class Comment(models.Model):
+    post = models.ForeignKey(Pizza, on_delete=models.CASCADE)
+    username = models.ForeignKey(Pizza, related_name='details', on_delete=models.CASCADE)
+    text = models.CharField(max_length=200)
+    date_added = models.DateTimeField(auto_now_add=True,blank=True)
+
+    def __str__(self):
+        return self.text

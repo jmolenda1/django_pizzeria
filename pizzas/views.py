@@ -1,5 +1,7 @@
 from django.shortcuts import render
-from .models import Pizza, Topping
+from .models import Pizza, Topping, Comment
+from .forms import CommentForm, PizzaForm, ToppingForm
+from .forms import *
 
 # Create your views here.
 def index(request):
@@ -8,7 +10,7 @@ def index(request):
 
 def pizzas(request):
     ''' Pizza List Page. '''
-    pizzas = Pizza.objects.order_by('text')
+    pizzas = Pizza.objects.order_by('date_added')
 
     context = {"pizzas":pizzas}
     return render(request, 'pizzas/pizzas.html', context)
@@ -16,20 +18,30 @@ def pizzas(request):
 def pizza(request, pizza_id):
     ''' Individual Pizzas. '''
     pizza = Pizza.objects.get(id=pizza_id)
-    toppings = pizza.topping_set.order_by('text')
-    context = {"toppings":toppings , "pizza":pizza}
+    toppings = pizza.topping_set.order_by('name')
+    context = {'pizza':pizza, 'toppings':toppings}
     return render(request, 'pizzas/pizza.html', context)
 
-def comments(request, pizza_id):
-    if request.method == 'GET' and request.GET.get("btn1"):
-        comment = request.GET.get("comment")
-        print(comment)
-        Comment.objects.create(post_id=pizza_id, username=request.user,text=comment,
-        date_added=date.today())
 
-    comments = Comment.objects.filter(post=pizza_id)
-    post = Post.objects.get(id=pizza_id)
 
-    context = {'post':post, 'comments':comments}
-    return render(request, 'FeedApp/comments.html', context)
+def new_comment(request, pizza_id):
+    pizza = Pizza.objects.get(id=pizza_id)
+    
+    if request.method != 'POST':
+        form = CommentForm()
+
+    else:
+        form = CommentForm(data=request.POST)
+
+        if form.is_valid():
+            new_comment = form.save(commit=False)
+            new_comment.pizza = pizza
+            new_comment.save() 
+
+            return redirect('pizzas:pizza', pizza_id=pizza_id)
+
+    context = {'form': form, 'pizza': pizza}
+
+    return render(request, 'pizzas/new_comment.html', context) 
+
 

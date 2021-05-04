@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .models import Pizza, Topping, Comment
 from .forms import CommentForm, PizzaForm, ToppingForm
 from .forms import *
@@ -19,7 +19,8 @@ def pizza(request, pizza_id):
     ''' Individual Pizzas. '''
     pizza = Pizza.objects.get(id=pizza_id)
     toppings = pizza.topping_set.order_by('name')
-    context = {'pizza':pizza, 'toppings':toppings}
+    comments = pizza.topping_set.order_by('date_added')
+    context = {'pizza':pizza, 'toppings':toppings, 'comments':comments}
     return render(request, 'pizzas/pizza.html', context)
 
 

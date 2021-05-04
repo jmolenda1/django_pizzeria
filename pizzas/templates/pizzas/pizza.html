@@ -15,25 +15,21 @@ Pizza List Page | Papa John's Pizzeria
 
 {% for topping in toppings %}
 
-<p>Pizza: {{ pizza }}</p>
-
 {{ topping }}
 <br>
 {% endfor %}
 <br><br>
-<p>
-    <font face="Optima" size="8px" color="FF5733"> PIZZA NAME </font>
-</p>
+<p>Pizza: {{ pizza }}</p>
  
 <p>
     Comments:
     </p>
 
     <ul>
-        {% for comment in comments %} 
+        {% for comment in new_comments %} 
 
         <li>
-            <p> {{ comment.name|linebreaks }}</p>
+            <p> {{ comment|linebreaks }}</p>
         </li>
         {% empty %} 
 

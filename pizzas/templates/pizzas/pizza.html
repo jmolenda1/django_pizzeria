@@ -5,12 +5,12 @@ Pizza List Page | Papa John's Pizzeria
 {% block content %}
 
 <p>
-    <font face="Optima" size="20px" color="FF5733"> Pizza Information </font>
+    <font face="Optima" size="10px" color="00000"> Pizza Information </font>
     <img src="static/images/Pizzeria Logo.jpg">
 </p>
-
+<p>You are viewing the {{ pizza }}</p>
 <p>
-    <font face="Optima" size = "8px" color="FF5733"> Ingredients List </font>
+    <font face="Optima" size = "6px" color="00000"> Ingredients List </font>
     <img src="static/images/Hawaiian_Pizza.jpg">
 </p>
 
@@ -20,12 +20,9 @@ Pizza List Page | Papa John's Pizzeria
 <br>
 {% endfor %}
 <br><br>
-<p>Pizza: {{ pizza }}</p>
- 
 <p>
-    Comments:
-    </p>
-
+    <font face="Optima" size="6px" color="00000"> Comments </font>
+</p>
     <ul>
         {% for comment in comments %} 
 

@@ -5,10 +5,10 @@ Pizza List Page | Papa John's Pizzeria
 {% block content %}
 
 <p>
-    <font face="Optima" size="20px" color="000000 "> Please select from our delicious list of pizzas </font>
+    <font face="Optima" size="20px" color="000000 "> Select from our delicious list of pizzas! </font>
+    <br>
     <img src="static/images/Pizzeria Logo.jpg">
 </p>
-
 {% for pizza in pizzas %}
 <a href="{% url 'pizzas:pizza' pizza.id %}">
 {{ pizza }}
@@ -16,7 +16,8 @@ Pizza List Page | Papa John's Pizzeria
 <br>
 {% endfor %}
 <br>
-<img src="static/images/Hawaiian_pizza.jpg">
-
+<p>
+    <img src="static/images/Hawaiian_pizza.jpg">
+</p>
 {% endblock content %}
 

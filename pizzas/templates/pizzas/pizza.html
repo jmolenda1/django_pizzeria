@@ -26,10 +26,10 @@ Pizza List Page | Papa John's Pizzeria
     </p>
 
     <ul>
-        {% for comment in new_comments %} 
+        {% for comment in comments %} 
 
         <li>
-            <p> {{ comment|linebreaks }}</p>
+            <p> {{ comment.name|linebreaks }}</p>
         </li>
         {% empty %} 
 
